@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArticlesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,20 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', function () {
-    return view('about', [
-        'articles' => App\Models\Article::take(3)->latest()->get()
-    ]);
-});
+Auth::routes();
 
-
-Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.index');
-Route::post('/articles', [ArticlesController::class, 'store']);
-Route::get('/articles/create', [ArticlesController::class, 'create']);
-Route::get('/articles/{article}', [ArticlesController::class, 'show'])->name('articles.show');
-Route::get('/articles/{article}/edit', [ArticlesController::class, 'edit']);
-Route::put('/articles/{article}', [ArticlesController::class, 'update']);
-
-
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
