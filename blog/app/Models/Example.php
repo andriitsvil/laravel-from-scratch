@@ -9,21 +9,15 @@ namespace App\Models;
  */
 class Example
 {
-    /**
-     * @var Collaborator
-     */
-    protected $collaborator;
+    protected $apiKey;
 
-    protected $foo;
-
-    public function __construct(Collaborator $collaborator, $foo)
+    public function __construct($apiKey)
     {
-        $this->collaborator = $collaborator;
-        $this->foo = $foo;
+        $this->apiKey = $apiKey;
     }
 
-    public function go(): void
+    public function handle(): void
     {
-        dump('It works');
+        die('It works');
     }
 }

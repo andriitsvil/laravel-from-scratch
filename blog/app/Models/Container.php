@@ -12,7 +12,7 @@ class Container
     /**
      * @var array
      */
-    protected $bindings = [];
+    protected array $bindings = [];
 
     /**
      * @param $key
