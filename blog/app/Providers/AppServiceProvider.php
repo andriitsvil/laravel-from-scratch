@@ -2,8 +2,15 @@
 
 namespace App\Providers;
 
+use App\Models\Collaborator;
+use App\Models\Example;
+
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class AppServiceProvider
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,9 +18,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->singleton(Example::class, function () {
+            $collaborator = new Collaborator();
+            $foo = 'foobar';
+            return new Example($collaborator, $foo);
+        });
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $container = new App\Models\Container();
+Route::get('/', [PagesController::class, 'home']);
 
-    $container->bind('example', function() {
-        return new App\Models\Example();
-    });
-
-    $example = $container->resolve('example');
-
-    $example->go();
-    //return view('welcome');
-});
+//Route::get('/', function (App\Models\Example $example) {
+//    //$example = app()->make();
+//    ddd($example);
+//    //return view('welcome');
+//});
