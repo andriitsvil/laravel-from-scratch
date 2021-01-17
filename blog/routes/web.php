@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $container = new App\Models\Container();
+
+    $container->bind('example', function() {
+        return new App\Models\Example();
+    });
+
+    $example = $container->resolve('example');
+
+    $example->go();
+    //return view('welcome');
 });
