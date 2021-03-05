@@ -22,7 +22,7 @@ class PaymentsController extends Controller
 
     public function store(): void
     {
-        \request()->user()->notify(new PaymentReceived());
+        \request()->user()->notify(new PaymentReceived(700));
         //Notification::send(\request()->user(), new PaymentReceived());
     }
 }
