@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\ConversationBestReplyController;
+use App\Http\Controllers\ConversationsController;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('conversations', [ConversationsController::class, 'index']);
+Route::get('conversations/{conversation}', [ConversationsController::class, 'show']);
+
+Route::post('best-replies/{reply}', [ConversationBestReplyController::class, 'store']);
