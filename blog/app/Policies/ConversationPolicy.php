@@ -17,11 +17,16 @@ class ConversationPolicy
 //        }
 //    }
 
+    public function view(User $user, Conversation $conversation)
+    {
+        return $conversation->user->is($user);
+    }
+
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Conversation  $conversation
+     * @param User $user
+     * @param Conversation $conversation
      * @return mixed
      */
     public function update(User $user, Conversation $conversation)

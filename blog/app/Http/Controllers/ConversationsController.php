@@ -14,8 +14,9 @@ class ConversationsController extends Controller
         ]);
     }
 
-    public function show(Conversation $conversation) {
-        //dd($conversation);
+    public function show(Conversation $conversation)
+    {
+//        $this->authorize('view', $conversation);
 
         return view('conversations.show', [
             'conversation' => $conversation
