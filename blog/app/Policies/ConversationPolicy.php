@@ -10,6 +10,13 @@ class ConversationPolicy
 {
     use HandlesAuthorization;
 
+//    public function before(User $user)
+//    {
+//        if ($user->id === 6) { // admin
+//            return true;
+//        }
+//    }
+
     /**
      * Determine whether the user can update the model.
      *
