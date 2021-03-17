@@ -4,9 +4,15 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -41,11 +47,41 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function conversations() {
+    /**
+     * @return HasMany
+     */
+    public function conversations(): HasMany
+    {
         return $this->hasMany(Conversation::class);
     }
 
-    public function replies() {
+    /**
+     * @return HasMany
+     */
+    public function replies(): HasMany
+    {
         return $this->hasMany(Reply::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::whereName($role)->firstOrFail();
+        }
+        $this->roles()->sync($role, false);
+//        $this->roles()->save($role);
+    }
+
+    public function abilities()
+    {
+        return $this->roles->map->abilities->flatten()->pluck('name')->unique();
     }
 }

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+auth()->loginUsingId(6);
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,3 +30,7 @@ Route::get('conversations', [ConversationsController::class, 'index']);
 Route::get('conversations/{conversation}', [ConversationsController::class, 'show'])->middleware('can:view,conversation');
 
 Route::post('best-replies/{reply}', [ConversationBestReplyController::class, 'store']);
+
+Route::get('/reports', function () {
+    return 'secret reports';
+})->middleware('can:view_reports');
