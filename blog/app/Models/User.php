@@ -41,4 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function timeline()
+    {
+        return Tweet::where('user_id', $this->id)->latest()->get();
+    }
+
+    /**
+     * @return string
+     */
+    public function avatar(): string
+    {
+        return 'https://eu.ui-avatars.com/api/?size=40&background=random&color=fff&name=' . $this->name;
+    }
 }
