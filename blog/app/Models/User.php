@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -53,5 +55,22 @@ class User extends Authenticatable
     public function avatar(): string
     {
         return 'https://eu.ui-avatars.com/api/?size=40&background=random&color=fff&name=' . $this->name;
+    }
+
+    /**
+     * @param User $user
+     * @return Model
+     */
+    public function follow(User $user): Model
+    {
+        return $this->following()->save($user);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
     }
 }
