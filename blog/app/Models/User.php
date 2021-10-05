@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -44,9 +45,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return mixed
+     */
     public function timeline()
     {
-        return Tweet::where('user_id', $this->id)->latest()->get();
+        $friendIds = $this->follows()->pluck('id');
+
+        return Tweet::whereIn('user_id', $friendIds)
+            ->orWhere('user_id', $this->id)
+            ->latest()
+            ->get();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class);
     }
 
     /**
@@ -63,13 +80,13 @@ class User extends Authenticatable
      */
     public function follow(User $user): Model
     {
-        return $this->following()->save($user);
+        return $this->follows()->save($user);
     }
 
     /**
      * @return BelongsToMany
      */
-    public function following(): BelongsToMany
+    public function follows(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
     }

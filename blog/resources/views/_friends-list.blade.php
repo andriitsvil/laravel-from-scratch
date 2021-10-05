@@ -1,6 +1,6 @@
 <h3 class="font-bold text-xl mb-4">Friends</h3>
 <ul>
-    @foreach(auth()->user()->following as $user)
+    @foreach(auth()->user()->follows as $user)
         <li class="mb-4">
             <div class="flex items-center text-sm">
                 <img src="{{ $user->avatar()  }}"
