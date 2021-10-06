@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\{Auth, Route};
 
+use App\Http\Controllers\{TweetsController, ProfilesController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +19,10 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('/tweets', [App\Http\Controllers\TweetsController::class, 'index'])->name('home');
-    Route::post('/tweets', [App\Http\Controllers\TweetsController::class, 'store']);
+    Route::get('/tweets', [TweetsController::class, 'index'])->name('home');
+    Route::post('/tweets', [TweetsController::class, 'store']);
 });
 
+Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
+
 Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

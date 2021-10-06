@@ -36,7 +36,7 @@ class TweetsController extends Controller
      */
     public function index(): Renderable
     {
-        return view('home', [
+        return view('tweets.index', [
             'tweets' => auth()->user()->timeline()
         ]);
     }
