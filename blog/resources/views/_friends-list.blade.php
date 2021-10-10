@@ -1,9 +1,9 @@
-<h3 class="font-bold text-xl mb-4">Friends</h3>
+<h3 class="font-bold text-xl mb-4">Following</h3>
 <ul>
     @foreach(auth()->user()->follows as $user)
         <li class="mb-4">
             <div>
-                <a href="{{ route('profile', $user->name) }}" class="flex items-center text-sm">
+                <a href="{{ $user->path() }}" class="flex items-center text-sm">
                 <img src="{{ $user->avatar()  }}"
                      alt="friend avatar"
                      class="rounded-full mr-2" style="width:40px;height:40px">
