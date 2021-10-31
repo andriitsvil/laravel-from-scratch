@@ -18,4 +18,4 @@
             </div>
         </main>
     </section>
-</x-master>>
+</x-master>

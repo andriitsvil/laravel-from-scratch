@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable
 {
@@ -74,10 +76,12 @@ class User extends Authenticatable
     }
 
     /**
+     * @param string $append
      * @return string
      */
-    public function path(): string
+    public function path(string $append = ''): string
     {
-        return route('profile', $this->id);
+        $path = route('profile', $this->id);
+        return $append ? "$path/$append" : $path;
     }
 }
