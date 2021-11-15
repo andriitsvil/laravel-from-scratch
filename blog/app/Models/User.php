@@ -22,6 +22,8 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'username',
+        'avatar',
         'name',
         'email',
         'password',
@@ -68,11 +70,12 @@ class User extends Authenticatable
     }
 
     /**
+     * @param $value
      * @return string
      */
-    public function avatar(): string
+    public function getAvatarAttribute($value): string
     {
-        return 'https://eu.ui-avatars.com/api/?size=40&background=random&color=fff&name=' . $this->name;
+        return asset('storage/' . $value);
     }
 
     /**
@@ -81,7 +84,7 @@ class User extends Authenticatable
      */
     public function path(string $append = ''): string
     {
-        $path = route('profile', $this->id);
+        $path = route('profile', $this->username);
         return $append ? "$path/$append" : $path;
     }
 }

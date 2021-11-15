@@ -22,10 +22,11 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/tweets', [TweetsController::class, 'index'])->name('home');
     Route::post('/tweets', [TweetsController::class, 'store']);
-    Route::post('/profiles/{user}/follow', [FollowsController::class, 'store']);
-    Route::get('/profiles/{user}/edit', [ProfilesController::class, 'edit'])->middleware('can:edit,user');
+    Route::post('/profiles/{user:username}/follow', [FollowsController::class, 'store']);
+    Route::get('/profiles/{user:username}/edit', [ProfilesController::class, 'edit'])->middleware('can:edit,user');
+    Route::patch('/profiles/{user:username}', [ProfilesController::class, 'update']);
 });
 
-Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profile');
+Route::get('/profiles/{user:username}', [ProfilesController::class, 'show'])->name('profile');
 
 Auth::routes();

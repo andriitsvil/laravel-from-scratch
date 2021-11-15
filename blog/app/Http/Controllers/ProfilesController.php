@@ -6,7 +6,7 @@ use App\Models\User;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\{Factory, View};
-use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 
 class ProfilesController extends Controller
@@ -27,5 +27,21 @@ class ProfilesController extends Controller
     public function edit(User $user)
     {
         return view('profiles.edit', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $attributes = request()->validate([
+            'username' => ['string', 'max:255', 'required', Rule::unique('users')->ignore($user), 'alpha_dash'],
+            'avatar' => ['file'],
+            'name' => ['string', 'max:255', 'required'],
+            'email' => ['string', 'required', 'max:255', 'email', Rule::unique('users')->ignore($user)],
+            'password' => ['string', 'required', 'min:8', 'max:255', 'confirmed']
+        ]);
+
+        $attributes['avatar'] = request('avatar')->store('avatars');
+
+        $user->update($attributes);
+        return redirect($user->path());
     }
 }
