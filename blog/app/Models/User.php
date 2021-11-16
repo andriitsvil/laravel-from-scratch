@@ -75,7 +75,16 @@ class User extends Authenticatable
      */
     public function getAvatarAttribute($value): string
     {
-        return asset('storage/' . $value);
+        $p = $value ? 'storage/' . $value : 'storage/avatars/default-avatar.jpg';
+        return asset($p);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setPasswordAttribute($value): void
+    {
+        $this->attributes['password'] = bcrypt($value);
     }
 
     /**
@@ -86,5 +95,10 @@ class User extends Authenticatable
     {
         $path = route('profile', $this->username);
         return $append ? "$path/$append" : $path;
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'username';
     }
 }

@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 
 class FollowsController extends Controller
 {
+    /**
+     * @param $providedUser
+     * @return RedirectResponse
+     */
     public function store($providedUser): RedirectResponse
     {
-        $providedUser = User::find($providedUser); // TODO without this string is not working - User not provides through request
+        $providedUser = User::where('username', $providedUser)->first(); // TODO without this string is not working - User not provides through request
         auth()->user()->toggleFollow($providedUser);
         return back();
     }

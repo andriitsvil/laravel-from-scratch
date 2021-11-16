@@ -37,14 +37,10 @@ trait Followable
 
     /**
      * @param User $user
-     * @return array|int
      */
-    public function toggleFollow(User $user)
+    public function toggleFollow(User $user): void
     {
-        if ($this->isFollowing($user)) {
-            return $this->unfollow($user);
-        }
-        return $this->follow($user);
+        $this->follows()->toggle($user);
     }
 
     /**
