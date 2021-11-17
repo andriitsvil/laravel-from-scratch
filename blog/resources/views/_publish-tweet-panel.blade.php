@@ -3,9 +3,9 @@
         @csrf
         <textarea name="body" class="w-full" placeholder="What's up doc?" reqired></textarea>
         <hr class="my-4">
-        <footer class="flex justify-between">
+        <footer class="flex justify-between items-center">
             <img src="{{ auth()->user()->avatar }}" alt="" class="rounded-full mr-2" style="width:40px;height:40px">
-            <button type="submit" class="bg-blue-500 rounded-lg shadow py-2 px-2 text-white">Tweet-a-roo!</button>
+            <button type="submit" class="hover:bg-blue-600 bg-blue-500 rounded-lg shadow py-2 px-12 text-white">Publish!</button>
         </footer>
     </form>
 

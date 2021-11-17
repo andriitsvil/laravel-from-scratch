@@ -1,6 +1,6 @@
 <x-master>
-<div class="container mx-auto px-6 py-4 bg-gray-400">
-    <div class="row justify-content-center">
+<div class="container mx-auto flex justify-center">
+    <div class="row px-6 py-4 border border-gray-300 bg-gray-200 rounded-lg">
         <div class="col-md-8">
             <div class="card">
                 <div class="font-bold text-lg mb-4">{{ __('Register') }}</div>
@@ -9,7 +9,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row pb-2">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row pb-2">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row pb-2">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row pb-2">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -75,7 +75,7 @@
 
                         <div class="form-group row mb-0 mt-8">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="px-6 py-3 rounded text-sm bg-blue-600 uppercase text-white">
+                                <button type="submit" class="px-6 py-3 rounded text-sm bg-blue-600 uppercase text-white mx-auto">
                                     {{ __('Register') }}
                                 </button>
                             </div>

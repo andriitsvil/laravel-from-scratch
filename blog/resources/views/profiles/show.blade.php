@@ -2,10 +2,10 @@
     <header class="mb-6 relative">
         <div class="relative">
             <img src="{{ asset('images/default-profile-banner.jpg') }}" alt="def" class="mb-4">
-            <img src="{{ $user->avatar }}" alt="" class="rounded-full absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" width="150" style="left:50%;">
+            <img src="{{ $user->avatar }}" alt="" class="border border-green-800 rounded-full absolute bottom-0 transform -translate-x-1/2 translate-y-1/2" width="150" style="left:50%;">
         </div>
         <div class="flex justify-between items-center mb-6">
-            <div>
+            <div style="max-width:400px;">
                 <h2 class="font-bold text-2xl mb-2">{{ $user->name }}</h2>
                 <p class="text-sm">Joined at {{ $user->created_at->diffForHumans() }}</p>
             </div>
@@ -24,5 +24,5 @@
         </p>
 
     </header>
-    @include('_timeline', ['tweets' => $user->tweets])
+    @include('_timeline', ['tweets' => $tweets])
 </x-app>

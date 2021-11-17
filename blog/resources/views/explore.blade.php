@@ -14,6 +14,6 @@
             </a>
         @endforeach
 
-        {{ $users->links() }}
+        {{ $users->links('pagination::tailwind') }}
     </div>
 </x-app>
