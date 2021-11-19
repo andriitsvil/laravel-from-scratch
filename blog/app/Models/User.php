@@ -57,6 +57,7 @@ class User extends Authenticatable
 
         return Tweet::whereIn('user_id', $friendIds)
             ->orWhere('user_id', $this->id)
+            ->withLikes()
             ->latest()
             ->paginate(50);
     }
@@ -100,5 +101,13 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'username';
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
     }
 }
